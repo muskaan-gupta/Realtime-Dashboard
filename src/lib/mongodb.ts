@@ -11,7 +11,6 @@ interface MongooseCache {
   promise: Promise<typeof mongoose> | null;
 }
 
-// Use global to prevent multiple connections during development
 declare global {
   var mongoose: MongooseCache | undefined;
 }
@@ -33,7 +32,7 @@ export default async function connectDB(): Promise<typeof mongoose> {
     };
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      console.log('✅ Connected to MongoDB');
+      console.log('Connected to MongoDB');
       return mongoose;
     });
   }

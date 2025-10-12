@@ -55,10 +55,10 @@ export function useSocket(): UseSocketReturn {
 
     socketRef.current = socket;
 
-    // Connection event handlers
+   
     socket.on('connect', () => {
       setIsConnected(true);
-      console.log('🔗 Connected to Socket.io server');
+      console.log(' Connected to Socket.io server');
       
       // Join dashboard room
       socket.emit('join-dashboard');
@@ -66,17 +66,17 @@ export function useSocket(): UseSocketReturn {
 
     socket.on('disconnect', (reason) => {
       setIsConnected(false);
-      console.log('❌ Disconnected from Socket.io server:', reason);
+      console.log('Disconnected from Socket.io server:', reason);
     });
 
     socket.on('connect_error', (error) => {
-      console.error('🚫 Socket connection error:', error);
+      console.error('Socket connection error:', error);
       setIsConnected(false);
     });
 
     // Dashboard event handlers
     socket.on('connected', (data) => {
-      console.log('✅ Server confirmed connection:', data);
+      console.log(' Server confirmed connection:', data);
     });
 
     socket.on('user-count-update', (count: number) => {
@@ -109,8 +109,6 @@ export function useSocket(): UseSocketReturn {
   };
 }
 
-// Custom hook for listening to specific socket events
-// Note: This should be used from SocketContext, not directly
 export function useSocketEvent<T = any>(
   socket: Socket | null,
   eventName: keyof SocketEvents,
@@ -127,8 +125,6 @@ export function useSocketEvent<T = any>(
   }, [socket, eventName, handler]);
 }
 
-// Hook for emitting socket events
-// Note: This should be used from SocketContext, not directly  
 export function useSocketEmit(socket: Socket | null) {
   const emit = (eventName: string, data?: any) => {
     if (socket && socket.connected) {

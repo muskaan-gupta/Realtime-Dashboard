@@ -177,38 +177,38 @@ async function addSampleData() {
   
   try {
     await client.connect();
-    console.log('🔗 Connected to MongoDB');
+    console.log('Connected to MongoDB');
     
     const db = client.db('realtime-analytics');
     
     // Generate sample data
-    console.log('📊 Generating sample data...');
+    console.log('Generating sample data...');
     const salesData = generateSalesData(75);
     const ordersData = generateOrdersData(45);
     const usersData = generateUsersData(12);
     
     // Insert sales data
-    console.log('💰 Adding sales data...');
+    console.log('Adding sales data...');
     await db.collection('sales').insertMany(salesData);
-    console.log(`✅ Added ${salesData.length} sales records`);
+    console.log(`Added ${salesData.length} sales records`);
     
     // Insert orders data
-    console.log('📦 Adding orders data...');
+    console.log('Adding orders data...');
     await db.collection('orders').insertMany(ordersData);
-    console.log(`✅ Added ${ordersData.length} order records`);
+    console.log(`Added ${ordersData.length} order records`);
     
     // Insert users data
-    console.log('👥 Adding users data...');
+    console.log('Adding users data...');
     await db.collection('users').insertMany(usersData);
-    console.log(`✅ Added ${usersData.length} user records`);
+    console.log(`Added ${usersData.length} user records`);
     
     // Display final counts
     const finalSalesCount = await db.collection('sales').countDocuments();
     const finalOrdersCount = await db.collection('orders').countDocuments();
     const finalUsersCount = await db.collection('users').countDocuments();
     
-    console.log('\n🎉 Sample data added successfully!');
-    console.log('📈 Final database counts:');
+    console.log('\n Sample data added successfully!');
+    console.log('Final database counts:');
     console.log(`   Sales: ${finalSalesCount}`);
     console.log(`   Orders: ${finalOrdersCount}`);
     console.log(`   Users: ${finalUsersCount}`);
@@ -222,15 +222,15 @@ async function addSampleData() {
       date: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) }
     });
     
-    console.log('\n💡 Sample statistics:');
+    console.log('\nSample statistics:');
     console.log(`   Total Revenue: $${totalRevenue[0]?.total?.toFixed(2) || '0.00'}`);
     console.log(`   Sales in last 7 days: ${recentSales}`);
     
   } catch (error) {
-    console.error('❌ Error adding sample data:', error);
+    console.error('Error adding sample data:', error);
   } finally {
     await client.close();
-    console.log('🔒 Database connection closed');
+    console.log('Database connection closed');
   }
 }
 

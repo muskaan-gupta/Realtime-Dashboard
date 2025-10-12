@@ -35,13 +35,13 @@ class SocketService {
     this.setupMiddleware();
     this.setupEventHandlers();
     
-    console.log('✅ Socket.io server initialized');
+    console.log('Socket.io server initialized');
   }
 
   private setupMiddleware() {
     if (!this.io) return;
 
-    // Authentication middleware
+
     this.io.use((socket: any, next) => {
       const token = socket.handshake.auth.token || socket.handshake.headers.authorization?.replace('Bearer ', '');
       
@@ -73,10 +73,10 @@ class SocketService {
         role: socket.userRole
       });
 
-      // Join dashboard room
+     
       socket.on('join-dashboard', () => {
         socket.join('dashboard');
-        console.log(`📊 User ${socket.userId} joined dashboard`);
+        console.log(`User ${socket.userId} joined dashboard`);
         
         // Send current user count
         this.emitUserCount();
@@ -85,12 +85,12 @@ class SocketService {
       // Leave dashboard room
       socket.on('leave-dashboard', () => {
         socket.leave('dashboard');
-        console.log(`🚪 User ${socket.userId} left dashboard`);
+        console.log(`User ${socket.userId} left dashboard`);
       });
 
       // Handle disconnection
       socket.on('disconnect', (reason: string) => {
-        console.log(`❌ User disconnected: ${socket.userId} (${reason})`);
+        console.log(`User disconnected: ${socket.userId} (${reason})`);
         this.connectedUsers.delete(socket.id);
         this.emitUserCount();
       });
@@ -108,7 +108,7 @@ class SocketService {
   emitNewSale(saleData: any) {
     if (this.io) {
       this.io.to('dashboard').emit('new-sale', saleData);
-      console.log('📈 New sale broadcasted to dashboard users');
+      console.log('New sale broadcasted to dashboard users');
     }
   }
 
@@ -116,7 +116,7 @@ class SocketService {
   emitNewOrder(orderData: any) {
     if (this.io) {
       this.io.to('dashboard').emit('new-order', orderData);
-      console.log('🛒 New order broadcasted to dashboard users');
+      console.log('New order broadcasted to dashboard users');
     }
   }
 
@@ -124,7 +124,7 @@ class SocketService {
   emitKPIUpdate(kpiData: any) {
     if (this.io) {
       this.io.to('dashboard').emit('kpi-update', kpiData);
-      console.log('📊 KPI update broadcasted to dashboard users');
+      console.log('KPI update broadcasted to dashboard users');
     }
   }
 
@@ -132,7 +132,7 @@ class SocketService {
   emitChartUpdate(chartData: any) {
     if (this.io) {
       this.io.to('dashboard').emit('chart-update', chartData);
-      console.log('📈 Chart update broadcasted to dashboard users');
+      console.log('Chart update broadcasted to dashboard users');
     }
   }
 
@@ -150,7 +150,7 @@ class SocketService {
         // Send to all dashboard users
         this.io.to('dashboard').emit('notification', notification);
       }
-      console.log('🔔 Notification sent');
+      console.log('Notification sent');
     }
   }
 
@@ -180,7 +180,7 @@ class SocketService {
           this.io?.to(socketId).emit('admin-message', message);
         }
       });
-      console.log('👑 Admin message broadcasted');
+      console.log('Admin message broadcasted');
     }
   }
 }

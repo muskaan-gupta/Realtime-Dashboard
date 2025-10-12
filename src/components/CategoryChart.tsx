@@ -54,17 +54,17 @@ export default function CategoryChart({
     );
   }
 
-  // Generate colors for categories
+  
   const colors = [
-    'rgba(59, 130, 246, 0.8)',   // Blue
-    'rgba(16, 185, 129, 0.8)',   // Green
-    'rgba(245, 101, 101, 0.8)',  // Red
-    'rgba(251, 191, 36, 0.8)',   // Yellow
-    'rgba(139, 92, 246, 0.8)',   // Purple
-    'rgba(236, 72, 153, 0.8)',   // Pink
-    'rgba(20, 184, 166, 0.8)',   // Teal
-    'rgba(249, 115, 22, 0.8)',   // Orange
-    'rgba(156, 163, 175, 0.8)',  // Gray
+    'rgba(59, 130, 246, 0.8)',  
+    'rgba(16, 185, 129, 0.8)',   
+    'rgba(245, 101, 101, 0.8)',  
+    'rgba(251, 191, 36, 0.8)',   
+    'rgba(139, 92, 246, 0.8)',   
+    'rgba(236, 72, 153, 0.8)',   
+    'rgba(20, 184, 166, 0.8)',   
+    'rgba(249, 115, 22, 0.8)',   
+    'rgba(156, 163, 175, 0.8)',  
   ];
 
   const borderColors = [
@@ -172,7 +172,7 @@ export default function CategoryChart({
         </div>
       )}
       
-      {/* Category legend with percentages */}
+   
       <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-2">
         {data.slice(0, 6).map((item, index) => (
           <div key={item.category} className="flex items-center space-x-2">

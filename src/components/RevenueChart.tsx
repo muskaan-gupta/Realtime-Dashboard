@@ -40,7 +40,7 @@ export default function RevenueChart({
   const chartRef = useRef<ChartJS<'line', number[], string>>(null);
 
   useEffect(() => {
-    // Force chart update when data changes
+ 
     if (chartRef.current) {
       chartRef.current.update();
     }

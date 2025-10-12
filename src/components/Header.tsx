@@ -113,13 +113,13 @@ export default function Header({
               {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
 
-            {/* Notifications */}
+            
             <NotificationBell
               notificationCount={notificationCount}
               onClick={onNotificationClick}
             />
 
-            {/* User Menu */}
+         
             <div className="relative">
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
@@ -136,7 +136,7 @@ export default function Header({
                 </div>
               </button>
 
-              {/* User Dropdown */}
+             
               {isUserMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
                   <div className="py-1">
@@ -178,7 +178,7 @@ export default function Header({
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+     
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-gray-200 dark:border-gray-700 py-4">
             <nav className="space-y-2">
@@ -203,7 +203,7 @@ export default function Header({
         )}
       </div>
 
-      {/* Click outside to close user menu */}
+   
       {isUserMenuOpen && (
         <div
           className="fixed inset-0 z-40"

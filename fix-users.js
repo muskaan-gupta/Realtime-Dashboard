@@ -43,11 +43,11 @@ async function fixUsers() {
       console.log('Fixed user:', user.email, '-> username:', username);
     }
     
-    console.log('✅ All users fixed!');
+    console.log('All users fixed!');
     
     // Verify the fix
     const adminCheck = await db.collection('users').findOne({ email: 'admin@demo.com' });
-    console.log('✅ Admin verification - Username:', adminCheck.username);
+    console.log('Admin verification - Username:', adminCheck.username);
     
   } finally {
     await client.close();

@@ -60,7 +60,7 @@ export default function AddSaleForm({ onSuccess, onCancel }: AddSaleFormProps) {
 
       const newSale = await response.json();
       
-      // Emit real-time update
+      
       if (socket) {
         socket.emit('newSale', newSale);
       }

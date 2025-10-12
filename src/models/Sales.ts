@@ -102,13 +102,13 @@ const SalesSchema: Schema = new Schema({
   timestamps: true
 });
 
-// Middleware to calculate total amount before saving
+
 SalesSchema.pre('save', function(this: ISales, next) {
   this.totalAmount = this.quantity * this.unitPrice;
   next();
 });
 
-// Create indexes for better query performance
+
 SalesSchema.index({ saleDate: -1 });
 SalesSchema.index({ productCategory: 1 });
 SalesSchema.index({ paymentStatus: 1 });

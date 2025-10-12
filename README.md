@@ -130,6 +130,3 @@ After running `npm run setup`, you can login with:
 - Verify port 3000 is available
 - Check CORS settings
 
-## 📄 License
-
-This project is licensed under the MIT License.

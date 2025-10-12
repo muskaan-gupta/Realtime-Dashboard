@@ -15,7 +15,6 @@ export function useSocketContext() {
   return context;
 }
 
-// Also export as useSocket for backward compatibility
 export { useSocketContext as useSocket };
 
 interface SocketProviderProps {

@@ -230,8 +230,7 @@ OrderSchema.pre('save', function(this: IOrder, next) {
   this.items.forEach((item: IOrderItem) => {
     item.totalPrice = item.quantity * item.unitPrice;
   });
-  
-  // Calculate subtotal from items
+
   this.subtotal = this.items.reduce((sum: number, item: IOrderItem) => sum + item.totalPrice, 0);
   
   // Ensure required fields have defaults
@@ -239,13 +238,11 @@ OrderSchema.pre('save', function(this: IOrder, next) {
   this.shipping = this.shipping || 0;
   this.discount = this.discount || 0;
   
-  // Calculate total amount
   this.totalAmount = this.subtotal + this.tax + this.shipping - this.discount;
   
   next();
 });
 
-// Create indexes for better query performance
 OrderSchema.index({ orderNumber: 1 });
 OrderSchema.index({ customerId: 1 });
 OrderSchema.index({ customerEmail: 1 });
@@ -254,28 +251,27 @@ OrderSchema.index({ orderStatus: 1 });
 OrderSchema.index({ paymentStatus: 1 });
 OrderSchema.index({ createdAt: -1 });
 
-// Method to calculate estimated delivery based on shipping method and location
 OrderSchema.methods.calculateEstimatedDelivery = function() {
   const orderDate = this.orderDate || new Date();
-  const deliveryDays = this.shippingAddress.country === 'USA' ? 3 : 7; // Faster domestic shipping
+  const deliveryDays = this.shippingAddress.country === 'USA' ? 3 : 7; 
   const estimatedDelivery = new Date(orderDate);
   estimatedDelivery.setDate(orderDate.getDate() + deliveryDays);
   return estimatedDelivery;
 };
 
-// Method to check if order can be cancelled
+
 OrderSchema.methods.canBeCancelled = function() {
   return ['pending', 'confirmed'].includes(this.orderStatus);
 };
 
-// Method to check if order can be returned
+
 OrderSchema.methods.canBeReturned = function() {
   if (this.orderStatus !== 'delivered') return false;
   
   const deliveryDate = this.actualDelivery || this.estimatedDelivery;
   const daysSinceDelivery = Math.floor((Date.now() - deliveryDate.getTime()) / (1000 * 60 * 60 * 24));
   
-  return daysSinceDelivery <= 30; // 30-day return policy
+  return daysSinceDelivery <= 30; 
 };
 
 export default mongoose.models.Order || mongoose.model<IOrder>('Order', OrderSchema);

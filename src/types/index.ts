@@ -90,7 +90,6 @@ export interface SocketEvents {
   'join-dashboard': () => void;
   'leave-dashboard': () => void;
   
-  // Server to client events
   'new-sale': (sale: any) => void;
   'new-order': (order: any) => void;
   'kpi-update': (kpiData: KPIData) => void;
@@ -99,7 +98,6 @@ export interface SocketEvents {
   'user-count-update': (count: number) => void;
 }
 
-// Auth types
 export interface LoginCredentials {
   email: string;
   password: string;
@@ -129,7 +127,6 @@ export interface JWTPayload {
   exp: number;
 }
 
-// Dashboard filters and settings
 export interface DashboardSettings {
   theme: 'light' | 'dark';
   refreshInterval: number; // in seconds
@@ -138,7 +135,7 @@ export interface DashboardSettings {
   defaultDateRange: '24h' | '7d' | '30d' | '90d' | '1y';
 }
 
-// Export/Report types
+
 export interface ExportOptions {
   format: 'csv' | 'xlsx' | 'pdf';
   dateRange: {

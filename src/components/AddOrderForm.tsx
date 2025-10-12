@@ -46,7 +46,7 @@ export default function AddOrderForm({ onSuccess, onCancel }: AddOrderFormProps)
     setLoading(true);
     setError('');
 
-    // Validate items
+ 
     const validItems = items.filter(item => item.productName && item.quantity > 0 && item.price > 0);
     if (validItems.length === 0) {
       setError('Please add at least one valid item');
@@ -57,7 +57,7 @@ export default function AddOrderForm({ onSuccess, onCancel }: AddOrderFormProps)
     const subtotal = validItems.reduce((sum, item) => sum + (item.quantity * item.price), 0);
     const totalAmount = subtotal + formData.tax + formData.shipping - formData.discount;
 
-    // Prepare items with required fields
+
     const orderItems = validItems.map(item => ({
       productId: `PROD-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
       productName: item.productName,
@@ -99,12 +99,12 @@ export default function AddOrderForm({ onSuccess, onCancel }: AddOrderFormProps)
 
       const newOrder = await response.json();
       
-      // Emit real-time update
+
       if (socket) {
         socket.emit('newOrder', newOrder);
       }
 
-      // Reset form
+ 
       setFormData({
         customerName: '',
         customerEmail: '',
@@ -302,7 +302,7 @@ export default function AddOrderForm({ onSuccess, onCancel }: AddOrderFormProps)
           </div>
         </div>
 
-        {/* Shipping Address */}
+
         <div>
           <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-3">Shipping Address</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

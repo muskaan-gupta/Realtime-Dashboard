@@ -76,7 +76,7 @@ export default function LoginForm() {
               />
             </div>
 
-            {/* Password Field */}
+          
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Password
@@ -108,7 +108,7 @@ export default function LoginForm() {
             </div>
           </div>
 
-          {/* Error Message */}
+          
           {error && (
             <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md p-4">
               <div className="text-sm text-red-600 dark:text-red-400">
@@ -133,7 +133,7 @@ export default function LoginForm() {
             </button>
           </div>
 
-          {/* Demo Credentials */}
+         
           <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md p-4">
             <h4 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">
               Demo Credentials

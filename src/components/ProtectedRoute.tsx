@@ -32,7 +32,6 @@ export default function ProtectedRoute({
     }
   }, [user, loading, requireAdmin, router, redirectTo]);
 
-  // Show loading spinner while checking authentication
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">

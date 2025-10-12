@@ -32,7 +32,7 @@ export class JWTService {
       const decoded = this.verifyToken(token);
       if (!decoded) return null;
 
-      // Check if token is close to expiry (within 1 day)
+   
       const now = Math.floor(Date.now() / 1000);
       const timeUntilExpiry = decoded.exp - now;
       const oneDayInSeconds = 24 * 60 * 60;
