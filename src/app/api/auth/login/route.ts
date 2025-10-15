@@ -6,7 +6,12 @@ import { LoginCredentials } from '@/types';
 
 export async function POST(req: NextRequest) {
   try {
-    await connectDB();
+    
+    const connectTimeout = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('Database connection timeout')), 10000)
+    );
+    
+    await Promise.race([connectDB(), connectTimeout]);
 
     const body: LoginCredentials = await req.json();
     const { email, password } = body;
@@ -19,7 +24,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Find user and include password for comparison
     const user = await User.findOne({ email }).select('+password');
     if (!user || !user.isActive) {
       return NextResponse.json(
@@ -37,13 +41,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Update last login
     await User.updateOne(
       { _id: user._id }, 
       { $set: { lastLogin: new Date() } }
     );
 
-    // Generate JWT token
+
     const token = JWTService.generateToken({
       id: user._id.toString(),
       username: user.username,
